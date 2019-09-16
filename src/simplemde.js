@@ -14,6 +14,13 @@ var CodeMirrorSpellChecker = require("codemirror-spell-checker");
 var marked = require("marked");
 
 
+require('mathjax/es5/tex-chtml');
+
+
+
+var md = require('markdown-it')()
+        .use(require('markdown-it-mathjax')());
+
 // Some variables
 var isMac = /Mac/.test(navigator.platform);
 
@@ -728,6 +735,7 @@ function toggleSideBySide(editor) {
 
 	var sideBySideRenderingFunction = function() {
 		preview.innerHTML = editor.options.previewRender(editor.value(), preview);
+        MathJax.typesetPromise();
 	};
 
 	if(!cm.sideBySideRenderingFunction) {
@@ -743,6 +751,13 @@ function toggleSideBySide(editor) {
 
 	// Refresh to fix selection being off (#309)
 	cm.refresh();
+    //MathJax.typeset();
+    //console.log('refresh!');
+    //MathJax.typesetPromise()
+    //var math = document.getElementsByClassName("editor-preview-side")[0];
+    //MathJax.Hub.Queue(["Typeset",MathJax.Hub,math]);
+    //console.log('This is toggleSideBySide');
+    MathJax.typesetPromise();
 }
 
 
@@ -786,6 +801,9 @@ function togglePreview(editor) {
 	var sidebyside = cm.getWrapperElement().nextSibling;
 	if(/editor-preview-active-side/.test(sidebyside.className))
 		toggleSideBySide(editor);
+      
+    //console.log('This is togglePreview');
+    MathJax.typesetPromise();
 }
 
 function _replaceSelection(cm, active, startEnd, url) {
@@ -1338,7 +1356,10 @@ function SimpleMDE(options) {
 	if(!options.previewRender) {
 		options.previewRender = function(plainText) {
 			// Note: "this" refers to the options object
-			return this.parent.markdown(plainText);
+            //let string = this.parent.markdown(plainText);
+            let string = md.render(plainText);
+            //console.log(string);
+			return string;
 		};
 	}
 
