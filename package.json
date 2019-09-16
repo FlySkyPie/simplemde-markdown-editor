@@ -12,7 +12,6 @@
   "homepage": "https://github.com/NextStepWebs/simplemde-markdown-editor",
   "main": "./src/js/simplemde.js",
   "license": "MIT",
-  "company": "Next Step Webs, Inc.",
   "author": {
     "name": "Wes Cossick",
     "url": "http://www.WesCossick.com"
@@ -21,28 +20,24 @@
     "url": "https://github.com/NextStepWebs/simplemde-markdown-editor/issues"
   },
   "dependencies": {
-    "codemirror": "*",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "codemirror": "^5.48.4",
     "codemirror-spell-checker": "*",
-    "marked": "*"
+    "markdown-it": "^10.0.0",
+    "markdown-it-mathjax": "^2.0.0",
+    "marked": "*",
+    "mathjax": "^3.0.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
   },
   "devDependencies": {
-    "browserify": "*",
     "debug": "*",
     "eslint": "*",
-    "gulp": "*",
-    "gulp-concat": "*",
-    "gulp-debug": "*",
-    "gulp-eslint": "*",
-    "gulp-header": "*",
-    "gulp-jsbeautifier": "*",
-    "gulp-clean-css": "*",
-    "gulp-rename": "*",
-    "gulp-uglify": "*",
     "vinyl-source-stream": "*",
     "vinyl-buffer": "*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NextStepWebs/simplemde-markdown-editor"
   }
 }
